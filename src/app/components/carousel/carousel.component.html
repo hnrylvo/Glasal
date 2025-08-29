@@ -1,0 +1,105 @@
+<div id="custom-carousel" class="relative w-full max-w-4xl mx-auto">
+  <!-- Texto encima -->
+  <div class="absolute w-full h-full px-4 z-30 md:bottom-10 flex items-center justify-center flex-col md:block md:w-2/3 md:h-auto">
+    <h2 class="text-lg text-center md:text-left md:text-3xl font-bold text-white drop-shadow-lg">
+      Soluciones a medida en vidrio y aluminio
+    </h2>
+    <p class="hidden md:block font-medium text-sm text-white drop-shadow-2xl">
+      Transforma tus espacios con diseños personalizados. Ventanas, puertas,
+      espejos y más.
+    </p>
+    <button
+      type="button"
+      class="text-white bg-blue-700 hover:bg-blue-800 my-2 font-bold rounded-md md:rounded-lg text-sm px-2 md:px-4 py-3 text-center"
+    >
+      Cotizar a medida
+    </button>
+  </div>
+
+  <!-- Contenedor del carousel -->
+  <div class="relative w-full h-56 overflow-hidden rounded-lg md:h-[30rem]">
+    @for (slide of slides; track $index) {
+    <img
+      [ngSrc]="slide"
+      fill
+      priority
+      class="block w-full h-full object-cover duration-700 ease-in-out"
+      [class.hidden]="$index !== currentIndex()"
+      alt="Slide {{ $index + 1 }}"
+    />
+    }
+  </div>
+
+  <!-- Indicadores -->
+  <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3">
+    @for (slide of slides; track $index) {
+    <button
+      type="button"
+      class="size-2 md:size-3 rounded-full border-2"
+      [class.bg-white]="$index === currentIndex()"
+      [class.bg-transparent]="$index !== currentIndex()"
+      (click)="showSlide($index)"
+    ></button>
+    }
+  </div>
+
+  <!-- Botón Anterior -->
+  <button
+    type="button"
+    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group"
+    (click)="prevSlide()"
+    aria-label="Slide anterior"
+  >
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none"
+    >
+      <svg
+        class="w-4 h-4 text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="5"
+          d="m15 19-7-7 7-7"
+        />
+      </svg>
+    </span>
+  </button>
+
+  <!-- Botón Siguiente -->
+  <button
+    type="button"
+    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group"
+    (click)="nextSlide()"
+    aria-label="Siguiente slide"
+  >
+    <span
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none"
+    >
+      <svg
+        class="w-4 h-4 text-white"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="5"
+          d="m9 5 7 7-7 7"
+        />
+      </svg>
+    </span>
+  </button>
+</div>
