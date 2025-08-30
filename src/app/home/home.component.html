@@ -1,19 +1,11 @@
-<header>
-  <app-navbar></app-navbar>
-</header>
-
-<main class="p-6 max-w-screen-xl mx-auto">
-  <app-carousel></app-carousel>
-  <div class="max-w-4xl mx-auto mt-9 md:mt-12">
-    <h2 class="text-lg md:text-2xl text-slate-800 mb-4 md:mb-6">Productos Destacados</h2>
-    <div class="w-full flex flex-nowrap overflow-x-auto gap-4">
-      <app-primary-card></app-primary-card>
-      <app-primary-card></app-primary-card>
-      <app-primary-card></app-primary-card>
-    </div>
+<app-carousel></app-carousel>
+<div class="max-w-4xl md:max-w-5xl mx-auto mt-9 md:mt-12">
+  <h2 class="text-lg md:text-2xl text-slate-800 font-medium">
+    Productos Destacados
+  </h2>
+  <div class="w-full flex flex-nowrap overflow-x-auto gap-5 md:justify-between py-4 md:py-6">
+    <app-primary-card></app-primary-card>
+    <app-primary-card></app-primary-card>
+    <app-primary-card></app-primary-card>
   </div>
-</main>
-
-<footer>
-  <app-footer></app-footer>
-</footer>
+</div>

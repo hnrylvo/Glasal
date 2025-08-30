@@ -1,31 +1,67 @@
-<nav class="bg-white border-gray-200">
+<nav class="bg-white shadow-sm border-b border-gray-100 top-0 z-50">
   <div
-    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3"
+    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
   >
+    <!-- Logo y título -->
     <a
-      href="https://flowbite.com/"
-      class="flex items-center space-x-3 rtl:space-x-reverse"
+      routerLink="/"
+      class="flex items-center text-gray-900 space-x-3 rtl:space-x-reverse"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        height="30px"
+        height="32px"
         viewBox="0 -960 960 960"
-        width="30px"
+        width="32px"
         fill="currentColor"
+        class="text-blue-600"
       >
         <path
           d="M480-80 120-436l200-244h320l200 244L480-80ZM183-680l-85-85 57-56 85 85-57 56Zm257-80v-120h80v120h-80Zm335 80-57-57 85-85 57 57-85 85ZM480-192l210-208H270l210 208ZM358-600l-99 120h442l-99-120H358Z"
         />
       </svg>
-      <span class="self-center text-2xl font-semibold whitespace-nowrap"
+      <span
+        class="self-center text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"
         >Glasal</span
       >
     </a>
-    <div class="flex md:order-2 gap-2 items-center">
-      <button class="text-gray-500 hover:bg-gray-100 focus:outline-none rounded-lg text-sm p-2.5 me-1">
+
+    <!-- Botones lado derecho -->
+    <div class="flex md:order-2 gap-3 items-center">
+      <!-- Buscador (desktop) -->
+      <div class="relative hidden md:block">
+        <div
+          class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+        >
+          <svg
+            class="w-4 h-4 text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 20"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+            />
+          </svg>
+        </div>
+        <input
+          type="text"
+          id="search-navbar"
+          class="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+          placeholder="Buscar..."
+        />
+      </div>
+
+      <!-- Carrito -->
+      <button
+        class="text-gray-700 hover:bg-gray-100 rounded-lg p-2.5 transition-colors duration-200 relative"
+      >
         <svg
           fill="currentColor"
-          class="size-6 text-gray-500"
+          class="size-6"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 640 640"
         >
@@ -33,155 +69,261 @@
             d="M32 160C32 124.7 60.7 96 96 96L384 96C419.3 96 448 124.7 448 160L448 192L498.7 192C515.7 192 532 198.7 544 210.7L589.3 256C601.3 268 608 284.3 608 301.3L608 448C608 483.3 579.3 512 544 512L540.7 512C530.3 548.9 496.3 576 456 576C415.7 576 381.8 548.9 371.3 512L268.7 512C258.3 548.9 224.3 576 184 576C143.7 576 109.8 548.9 99.3 512L96 512C60.7 512 32 483.3 32 448L32 160zM544 352L544 301.3L498.7 256L448 256L448 352L544 352zM224 488C224 465.9 206.1 448 184 448C161.9 448 144 465.9 144 488C144 510.1 161.9 528 184 528C206.1 528 224 510.1 224 488zM456 528C478.1 528 496 510.1 496 488C496 465.9 478.1 448 456 448C433.9 448 416 465.9 416 488C416 510.1 433.9 528 456 528z"
           />
         </svg>
+        <!-- Indicador de elementos en el carrito -->
+        <span
+          class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium"
+          >3</span
+        >
       </button>
+
+      <!-- Botón hamburguesa (responsive) -->
       <button
         type="button"
-        data-collapse-toggle="navbar-search"
-        aria-controls="navbar-search"
-        aria-expanded="false"
-        class="md:hidden text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg text-sm p-2.5 me-1"
+        class="inline-flex items-center p-2.5  justify-center text-gray-700 rounded-lg md:hidden hover:bg-gray-100 transition-colors duration-200"
+        aria-controls="mobile-menu"
+        [attr.aria-expanded]="isMenuOpen()"
+        (click)="toggleMenu()"
       >
+        <span class="sr-only">Abrir menú principal</span>
         <svg
-          class="w-5 h-5"
-          aria-hidden="true"
+        class="size-7"
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
+          viewBox="0 -960 960 960"
+          fill="currentColor"
         >
           <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
-        </svg>
-        <span class="sr-only">Search</span>
-      </button>
-      <div class="relative hidden md:block">
-        <div
-          class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-        >
-          <svg
-            class="w-4 h-4 text-gray-500"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-          <span class="sr-only">Search icon</span>
-        </div>
-        <input
-          type="text"
-          id="search-navbar"
-          class="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Buscar..."
-        />
-      </div>
-      <button
-        data-collapse-toggle="navbar-search"
-        type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-        aria-controls="navbar-search"
-        aria-expanded="false"
-      >
-        <span class="sr-only">Open main menu</span>
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15"
+            d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
           />
         </svg>
       </button>
     </div>
+
+    <!-- Posición del menú móvil -->
     <div
-      class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-      id="navbar-search"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-300"
+      [class]="
+        isMenuOpen()
+          ? 'opacity-100 pointer-events-auto'
+          : 'opacity-0 pointer-events-none'
+      "
+      (click)="closeMenu()"
+    ></div>
+
+    <!-- Menú móvil mejorado -->
+    <div
+      id="mobile-menu"
+      class="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-in-out"
+      [class]="isMenuOpen() ? 'translate-x-0' : 'translate-x-full'"
     >
-      <div class="relative mt-3 md:hidden">
-        <div
-          class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+      <!-- Header del menú móvil -->
+      <div
+        class="flex items-center justify-between p-6 border-b border-gray-100"
+      >
+        <h2 class="text-lg font-semibold text-gray-900">Menú</h2>
+        <button
+          (click)="closeMenu()"
+          class="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
         >
           <svg
-            class="w-4 h-4 text-gray-500"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 text-gray-600"
             fill="none"
-            viewBox="0 0 20 20"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
             <path
-              stroke="currentColor"
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
           </svg>
-        </div>
-        <input
-          type="text"
-          id="search-navbar"
-          class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Buscar..."
-        />
+        </button>
       </div>
-      <ul
-        class="flex flex-col p-4 md:p-0 mt-4 items-center font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white"
+
+      <!-- Buscador (móvil) -->
+      <div class="p-4 border-b border-gray-100">
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="search-navbar-mobile"
+            class="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+            placeholder="Buscar productos..."
+          />
+        </div>
+      </div>
+
+      <!-- Items del menú -->
+      <div class="flex-1 overflow-y-auto">
+        <ul class="py-4">
+          <li>
+            <a
+              routerLink="/productos"
+              (click)="closeMenu()"
+              class="flex items-center px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200 group"
+            >
+              <svg
+                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-blue-600 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                ></path>
+              </svg>
+              <span class="font-medium">Productos</span>
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/servicios"
+              (click)="closeMenu()"
+              class="flex items-center px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200 group"
+            >
+              <svg
+                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-blue-600 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+              <span class="font-medium">Servicios</span>
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/contacto"
+              (click)="closeMenu()"
+              class="flex items-center px-6 py-4 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200 group"
+            >
+              <svg
+                class="w-5 h-5 mr-3 text-gray-400 group-hover:text-blue-600 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span class="font-medium">Contacto</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Botón Cotizar destacado -->
+        <div class="px-6 py-4 border-t border-gray-100">
+          <a
+            routerLink="/cotizar"
+            (click)="closeMenu()"
+            class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-6 rounded-lg text-center block transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <svg
+              class="w-5 h-5 inline mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            Cotizar Ahora
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer del menú móvil -->
+      <div class="p-6 border-t border-gray-100">
+        <div class="flex items-center justify-center space-x-4">
+          <a
+            href="tel:+1234567890"
+            class="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"
+              ></path>
+            </svg>
+            <span class="text-sm font-medium">Llamar</span>
+          </a>
+          <a
+            href="mailto:info@glasal.com"
+            class="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200"
+          >
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
+              ></path>
+              <path
+                d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
+              ></path>
+            </svg>
+            <span class="text-sm font-medium">Email</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menú desktop -->
+    <div class="hidden md:flex items-center space-x-8">
+      <a
+        routerLink="/productos"
+        class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
       >
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-2 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
-            >Productos</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
-            >Servicios</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
-            >Proyectos</a
-          >
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0"
-            >Contacto</a
-          >
-        </li>
-        <li>
-          <button
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
-          >
-            Cotizar
-          </button>
-        </li>
-      </ul>
+        Productos
+      </a>
+      <a
+        routerLink="/servicios"
+        class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+      >
+        Servicios
+      </a>
+      <a
+        routerLink="/contacto"
+        class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+      >
+        Contacto
+      </a>
+      <a
+        routerLink="/cotizar"
+        class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium px-6 py-2.5 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+      >
+        Cotizar
+      </a>
     </div>
   </div>
 </nav>

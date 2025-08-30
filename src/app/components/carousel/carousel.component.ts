@@ -1,19 +1,25 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, signal } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, RouterLink],
   templateUrl: './carousel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarouselComponent implements OnInit, OnDestroy {
   readonly slides = [
     'assets/images/item2.jpg',
-    'https://lh4.googleusercontent.com/proxy/eUCa9UiYEBdgPAsqbCingJnKDSnB244HNRJvEcmDvvOBuiDtjXF1rZ1MucBiqQwvNkB77tgTaT1av_EuPRY1s9iN5FaNPjgky3qwW9XCDNL7bPGJZHIv8papxteDmBTE20c',
     'https://www.installux-es.com/hubfs/estructuras-de-aluminio.jpg',
     'https://ventglas.com/wp-content/uploads/2015/02/21102008033.jpg',
-    'https://aluminiossardina.es/wp-content/uploads/2022/10/ventanas-grandes-o-pequenas.jpg'
+    'https://aluminiossardina.es/wp-content/uploads/2022/10/ventanas-grandes-o-pequenas.jpg',
   ];
 
   currentIndex = signal(0);
@@ -32,7 +38,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   prevSlide(): void {
-    const prev = (this.currentIndex() - 1 + this.slides.length) % this.slides.length;
+    const prev =
+      (this.currentIndex() - 1 + this.slides.length) % this.slides.length;
     this.currentIndex.set(prev);
   }
 
